@@ -44,14 +44,6 @@
 >
 > 镜像就绪后，这里会给出 `docker pull` + `docker run` 的完整命令与端口/数据卷说明。
 
-### 可选组件：CodeBuddy（智能体调度器）
-
-云麓Muse 可搭配 **CodeBuddy** 作为智能体调度器使用——**可选**，不装也能跑核心功能；也支持自行构建。
-
-```
-crpi-wa43hfv9bz6o3juz.cn-hangzhou.personal.cr.aliyuncs.com/musecodebuddy/codebuddy:latest
-```
-
 ## 界面截图
 
 > 📷 截图整理中，稍后补充（工作流画布 / 笔记工作台 / 任务块 / AI 存储 / 桌面客户端）。
