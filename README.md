@@ -46,7 +46,20 @@
 
 ## 下载客户端
 
-> 🚧 **桌面安装包（Windows / macOS / Android）将通过 Releases 提供，正在打包中。**
+最新客户端：**[Releases → v0.2.10](https://github.com/lhl321/yunlu-muse/releases/tag/v0.2.10)**
+
+| 平台 | 下载 | 大小 |
+|------|------|------|
+| Windows | [MuseNote-Windows.exe](https://github.com/lhl321/yunlu-muse/releases/download/v0.2.10/MuseNote-Windows.exe) | 1.6MB |
+| macOS (Apple Silicon) | [MuseNote-macOS.dmg](https://github.com/lhl321/yunlu-muse/releases/download/v0.2.10/MuseNote-macOS.dmg) | 5.6MB |
+| Android | [MuseNote-Android.apk](https://github.com/lhl321/yunlu-muse/releases/download/v0.2.10/MuseNote-Android.apk) | 6.1MB |
+
+**安装提示**
+- macOS 未公证：首次打开请**右键 → 打开**，或在「系统设置 → 隐私与安全性」点「仍要打开」
+- Windows 未签名：若弹 SmartScreen，点「更多信息 → 仍要运行」
+- Android：安装时允许「未知来源」
+
+> 国内下载 GitHub 较慢时，可稍后提供镜像直链。
 
 ## 开源说明
 
