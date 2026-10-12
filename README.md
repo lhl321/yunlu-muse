@@ -42,11 +42,52 @@
 | [MuseNote 实战教程](docs/MuseNote实战教程.md) | AI 笔记：任务块、智能体接入、MCP 密钥、AI 存储、联邦与共享 |
 | [部署指南](docs/部署指南.md) | 单容器一键部署：docker-compose 示例、端口/数据卷说明、升级与备份 |
 
-## 部署
+## 部署（Docker 一键）
 
-> 🚧 **云麓Muse 主镜像：即将提供（版本号仍在迭代，稳定后公布拉取地址与一键部署命令）。**
->
-> 部署方式与完整示例见 **[部署指南](docs/部署指南.md)**（docker-compose / 端口 / 数据卷 / 升级备份）。镜像就绪后把占位的镜像地址替换为你自己的即可。
+云麓 Muse 把「云麓AI + MuseNote」打包在**同一个容器**里，用 `docker compose` 三步跑起来。
+
+**① 准备 `docker-compose.yml`**（可直接复制仓库里的 [`deploy/docker-compose.yml`](deploy/docker-compose.yml)）：
+
+```yaml
+services:
+  yulu-muse:
+    image: <你的镜像仓库地址>/yulu-muse:<版本号>
+    container_name: yulu-muse
+    restart: unless-stopped
+    ports:
+      - "4888:4888"   # 云麓AI 主站
+      - "4887:4887"   # MuseNote 笔记
+      - "4889:4889"
+      - "8765:8765"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./data/ai-brain:/usr/local/app/ai-brain/data
+      - ./data/museapp:/usr/local/app/ai-brain/museapp/data
+      - ./data/upfile:/usr/local/app/ai-brain/upfile
+      - ./data/notedata:/usr/local/app/ai-brain/musenote/data
+    environment:
+      - TZ=Asia/Shanghai
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 3G
+```
+
+**② 启动：**
+
+```bash
+docker compose up -d
+docker compose logs -f yulu-muse   # 看日志确认起来了
+```
+
+**③ 浏览器访问：**
+
+- 云麓AI：`http://<服务器IP>:4888/`
+- MuseNote：`http://<服务器IP>:4887/`
+
+> 📌 把 `image` 一行的 `<你的镜像仓库地址>/yulu-muse:<版本号>` 换成你拿到的镜像地址即可（官方稳定拉取地址随版本公布）。完整端口 / 数据卷 / 升级备份 / 常见问题见 **[部署指南](docs/部署指南.md)**。
 
 ## 界面截图
 
