@@ -1,0 +1,31 @@
+# 云麓 Muse 部署文件（示例）
+# ─────────────────────────────────────────────
+# 一个容器同时承载「云麓AI 工作流引擎」+「MuseNote AI 笔记」。
+# 下面的镜像地址与数据卷路径均为占位示例，请替换为你自己的值：
+#   - image：<你的镜像仓库地址>/<命名空间>/<镜像名>:<版本号>
+#   - 数据卷 ./data/... 可换成任意宿主机目录，保持左侧相对/绝对路径即可
+# ─────────────────────────────────────────────
+services:
+  yulu-muse:
+    image: <你的镜像仓库地址>/yulu-muse:<版本号>
+    container_name: yulu-muse
+    restart: unless-stopped
+    ports:
+      - "4888:4888"   # 云麓AI 主站（容器内部固定 4888，宿主端口可按需改左侧）
+      - "4889:4889"
+      - "4887:4887"   # MuseNote 笔记
+      - "8765:8765"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./data/ai-brain:/usr/local/app/ai-brain/data           # 云麓AI 数据
+      - ./data/museapp:/usr/local/app/ai-brain/museapp/data     # MuseApp 数据
+      - ./data/upfile:/usr/local/app/ai-brain/upfile            # 上传/安装包
+      - ./data/notedata:/usr/local/app/ai-brain/musenote/data   # MuseNote 数据
+    environment:
+      - TZ=Asia/Shanghai
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 3G
