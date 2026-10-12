@@ -51,7 +51,7 @@
 ```yaml
 services:
   yulu-muse:
-    image: <官方镜像地址>
+    image: crpi-wa43hfv9bz6o3juz.cn-hangzhou.personal.cr.aliyuncs.com/lhl321/yulu-muse:v72
     container_name: yulu-muse
     restart: unless-stopped
     ports:
@@ -87,7 +87,7 @@ docker compose logs -f yulu-muse   # 看日志确认起来了
 - 云麓AI：`http://<服务器IP>:4888/`
 - MuseNote：`http://<服务器IP>:4887/`
 
-> 📌 把 `image` 一行换成你拿到的官方镜像地址即可（`4887` 笔记 / `4888` 主站 / `4889` MuseApp / `8765` MCP 接入四个端口的含义、以及 `./data` 四个数据卷各存什么，见 **[部署指南](docs/部署指南.md)**）。
+> 📌 `image` 已填官方镜像地址，直接 `docker compose up -d` 即可（若拉取报权限，见部署指南说明）。`4887` 笔记 / `4888` 主站 / `4889` MuseApp / `8765` MCP 接入四个端口的含义、以及 `./data` 四个数据卷各存什么、路径怎么改，见 **[部署指南](docs/部署指南.md)**。
 
 ## 界面截图
 

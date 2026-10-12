@@ -2,13 +2,13 @@
 # ─────────────────────────────────────────────
 # 一个容器同时承载「云麓AI 工作流引擎 + MuseNote AI 笔记 + MuseApp + MCP 接入」。
 # 只需要改两处：
-#   1) image：换成你拿到的官方镜像地址（整行照抄即可）
-#   2) 数据卷冒号「左边」的 ./data/...：可换成任意宿主目录（NAS 上常改成 /vol1/... 之类）
+#   1) image：已填官方镜像地址，直接照抄（拉取报权限=仓库私有，需设为公开或向发布方要账号）
+#   2) 数据卷冒号「左边」的 ./data/...：默认相对 compose 文件所在目录，可换成任意宿主目录
 #      冒号「右边」是容器内固定路径，不要改。
 # ─────────────────────────────────────────────
 services:
   yulu-muse:
-    image: <官方镜像地址>
+    image: crpi-wa43hfv9bz6o3juz.cn-hangzhou.personal.cr.aliyuncs.com/lhl321/yulu-muse:v72
     container_name: yulu-muse
     restart: unless-stopped
     ports:
