@@ -51,14 +51,14 @@
 ```yaml
 services:
   yulu-muse:
-    image: <你的镜像仓库地址>/yulu-muse:<版本号>
+    image: <官方镜像地址>
     container_name: yulu-muse
     restart: unless-stopped
     ports:
-      - "4888:4888"   # 云麓AI 主站
       - "4887:4887"   # MuseNote 笔记
-      - "4889:4889"
-      - "8765:8765"
+      - "4888:4888"   # 云麓AI 主站
+      - "4889:4889"   # MuseApp 子站
+      - "8765:8765"   # MCP 智能体接入服务
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
@@ -87,7 +87,7 @@ docker compose logs -f yulu-muse   # 看日志确认起来了
 - 云麓AI：`http://<服务器IP>:4888/`
 - MuseNote：`http://<服务器IP>:4887/`
 
-> 📌 把 `image` 一行的 `<你的镜像仓库地址>/yulu-muse:<版本号>` 换成你拿到的镜像地址即可（官方稳定拉取地址随版本公布）。完整端口 / 数据卷 / 升级备份 / 常见问题见 **[部署指南](docs/部署指南.md)**。
+> 📌 把 `image` 一行换成你拿到的官方镜像地址即可（`4887` 笔记 / `4888` 主站 / `4889` MuseApp / `8765` MCP 接入四个端口的含义、以及 `./data` 四个数据卷各存什么，见 **[部署指南](docs/部署指南.md)**）。
 
 ## 界面截图
 

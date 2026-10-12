@@ -1,27 +1,28 @@
 # 云麓 Muse 部署文件（示例）
 # ─────────────────────────────────────────────
-# 一个容器同时承载「云麓AI 工作流引擎」+「MuseNote AI 笔记」。
-# 下面的镜像地址与数据卷路径均为占位示例，请替换为你自己的值：
-#   - image：<你的镜像仓库地址>/<命名空间>/<镜像名>:<版本号>
-#   - 数据卷 ./data/... 可换成任意宿主机目录，保持左侧相对/绝对路径即可
+# 一个容器同时承载「云麓AI 工作流引擎 + MuseNote AI 笔记 + MuseApp + MCP 接入」。
+# 只需要改两处：
+#   1) image：换成你拿到的官方镜像地址（整行照抄即可）
+#   2) 数据卷冒号「左边」的 ./data/...：可换成任意宿主目录（NAS 上常改成 /vol1/... 之类）
+#      冒号「右边」是容器内固定路径，不要改。
 # ─────────────────────────────────────────────
 services:
   yulu-muse:
-    image: <你的镜像仓库地址>/yulu-muse:<版本号>
+    image: <官方镜像地址>
     container_name: yulu-muse
     restart: unless-stopped
     ports:
-      - "4888:4888"   # 云麓AI 主站（容器内部固定 4888，宿主端口可按需改左侧）
-      - "4889:4889"
-      - "4887:4887"   # MuseNote 笔记
-      - "8765:8765"
+      - "4887:4887"   # MuseNote 笔记（浏览器主入口）
+      - "4888:4888"   # 云麓AI 主站（工作流控制台）
+      - "4889:4889"   # MuseApp 子站（智能体生成的应用/页面）
+      - "8765:8765"   # MCP 智能体接入服务（外部智能体连进来读写笔记/工作流）
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - ./data/ai-brain:/usr/local/app/ai-brain/data           # 云麓AI 数据
-      - ./data/museapp:/usr/local/app/ai-brain/museapp/data     # MuseApp 数据
-      - ./data/upfile:/usr/local/app/ai-brain/upfile            # 上传/安装包
-      - ./data/notedata:/usr/local/app/ai-brain/musenote/data   # MuseNote 数据
+      - /etc/localtime:/etc/localtime:ro      # 共用宿主系统时间（只读）
+      - /etc/timezone:/etc/timezone:ro        # 共用宿主时区（只读）
+      - ./data/ai-brain:/usr/local/app/ai-brain/data           # 云麓AI：工作流/执行记录/实体/设置/令牌
+      - ./data/museapp:/usr/local/app/ai-brain/museapp/data    # MuseApp：智能体生成的应用/页面
+      - ./data/upfile:/usr/local/app/ai-brain/upfile           # 上传文件：图片/文档/安装包/AI存储附件
+      - ./data/notedata:/usr/local/app/ai-brain/musenote/data  # MuseNote：笔记库/账号/AI存储/技能（最关键）
     environment:
       - TZ=Asia/Shanghai
     deploy:
