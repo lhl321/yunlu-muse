@@ -51,7 +51,7 @@
 ```yaml
 services:
   yulu-muse:
-    image: crpi-wa43hfv9bz6o3juz.cn-hangzhou.personal.cr.aliyuncs.com/lhl321/yulu-muse:v72
+    image: crpi-wa43hfv9bz6o3juz.cn-hangzhou.personal.cr.aliyuncs.com/yulu-ai/yulu-ai:v77
     container_name: yulu-muse
     restart: unless-stopped
     ports:
